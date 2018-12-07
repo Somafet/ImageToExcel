@@ -3,8 +3,8 @@ import os
 from PIL import Image
 
 # DISCLAIMER: For now works with small images
-# file_name = 'league.png'
-file_name = 'aperture-icon.png'
+file_name = 'me.png'
+# file_name = 'aperture-icon.png'
 
 print('Image name: ', file_name)
 
@@ -18,6 +18,7 @@ def get_pixels_from_image(name):
     im = Image.open(name)
     return im.size, im.load()
 
+# Transparent elements are regarded as white
 def rgb_to_hex(r, g, b, a = 255):
     if a == 0:
         return '#FFFFFF'
@@ -38,7 +39,7 @@ ws = workbook.add_worksheet('Image')
 ws.set_default_row(10)
 ws.set_column(0, im_size[0] - 1, 1)
 
-formats = {}
+formats = {} # Excel can only handle a limite amount of formats. So all unique colours are stored for reusability
 
 for col in range(0, im_size[1]):
     for row in range(0, im_size[0]):
